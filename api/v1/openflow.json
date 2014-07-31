@@ -1,0 +1,249 @@
+{
+  "apiVersion": "1.0.0",
+  "swaggerVersion": "1.2",
+  "basePath": "#{@@basepath}",
+  "resourcePath": "/openflow",
+  "produces": [
+    "application/json"
+  ],
+  "authorizations": {},
+  "apis": [
+    {
+      "path": "/openflow",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find Openflow switch by uuID",
+          "notes": "",
+          "type": "Openflow",
+          "nickname": "getOpenflowByUUID",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "uuid",
+              "description": "uuID of Openflow switch that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Openflow not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/openflow",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find Openflow switch by Name",
+          "notes": "",
+          "type": "Openflow",
+          "nickname": "getOpenflowByName",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "name",
+              "description": "Name of Openflow switch that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid Name supplied"
+            },
+            {
+              "code": 404,
+              "message": "Openflow switch not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/openflow",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Create a resource of type Openflow switch",
+          "notes": "",
+          "type": "void",
+          "nickname": "placeOpenflow",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "order placed for creating an Openflow switch",
+              "required": true,
+              "type": "Openflow",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid order"
+            }
+          ]
+        },
+        {
+          "method": "PUT",
+          "summary": "Update an existing Openflow switch",
+          "notes": "",
+          "type": "void",
+          "nickname": "updateOpenflow",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "Openflow switch that needs to be updated ",
+              "required": true,
+              "type": "Openflow",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Openflow not found"
+            },
+            {
+              "code": 405,
+              "message": "Validation exception"
+            }
+          ]
+        },
+        {
+          "method": "DELETE",
+          "summary": "Delete Openflow switch",
+          "notes": "",
+          "type": "void",
+          "nickname": "deleteOpenflow",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "Openflow switch to be deleted in jason format",
+              "required": true,
+              "type": "Openflow",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Openflow switch not found"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Openflow": {
+      "id": "Openflow",
+      "properties": {
+        "hostname": {
+          "type": "string"
+        },
+        "switch_model": {
+          "type": "string"
+        },
+        "switch_type": {
+          "type": "string"
+        },
+        "openflow_version": {
+          "type": "string"
+        },
+        "switch_OS": {
+          "type": "string"
+        },
+        "datapath_id": {
+          "type": "string"
+        },
+        "interfaces":{
+          "$ref": "Interface"
+        },
+        "of_controller_ip": {
+          "type": "IP"
+        },
+        "of_controller_port": {
+          "type": "string"
+        }
+      }
+    },
+    "IP": {
+      "id": "IP",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "netmask": {
+          "type": "string"
+        },
+        "ip_type": {
+          "type": "string",
+          "description": "type of ip",
+          "enum": [
+            "ipv4",
+            "ipv6"
+          ]
+        },
+        "interface": {
+          "$ref": "Interface"
+        }
+      }
+    },
+    "Interface": {
+      "id": "Interface",
+      "properties": {
+        "role": {
+          "type": "string"
+        },
+        "mac": {
+          "type": "string"
+        },
+        "ip": {
+          "$ref": "IP"
+        },
+        "description": {
+          "type": "string"
+        },
+        "link": {
+          "$ref": "Link"
+        }
+      }
+    },
+    "Link": {
+      "id": "Link",
+      "properties": {
+        "link_type": {
+          "type": "string"
+        },
+        "interfaces": {
+          "$ref": "Interface"
+        }
+      }
+    }
+  }
+}

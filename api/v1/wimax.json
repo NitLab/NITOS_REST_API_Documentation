@@ -1,0 +1,184 @@
+{
+  "apiVersion": "1.0.0",
+  "swaggerVersion": "1.2",
+  "basePath": "#{@@basepath}",
+  "resourcePath": "/wimax",
+  "produces": [
+    "application/json"
+  ],
+  "authorizations": {},
+  "apis": [
+    {
+      "path": "/wimax",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find Wimax by uuID",
+          "notes": "",
+          "type": "Wimax",
+          "nickname": "getWimaxByUUID",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "uuid",
+              "description": "uuID of Wimax that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Wimax not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/wimax",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find Wimax by Name",
+          "notes": "",
+          "type": "Wimax",
+          "nickname": "getWimaxByName",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "name",
+              "description": "Name of Wimax that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid Name supplied"
+            },
+            {
+              "code": 404,
+              "message": "Wimax not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/wimax",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Create a resource of type Wimax",
+          "notes": "",
+          "type": "void",
+          "nickname": "placeWimax",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "order placed for creating a Wimax",
+              "required": true,
+              "type": "Wimax",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid order"
+            }
+          ]
+        },
+        {
+          "method": "PUT",
+          "summary": "Update an existing Wimax",
+          "notes": "",
+          "type": "void",
+          "nickname": "updateWimax",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "Wimax that needs to be updated ",
+              "required": true,
+              "type": "Wimax",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Wimax not found"
+            },
+            {
+              "code": 405,
+              "message": "Validation exception"
+            }
+          ]
+        },
+        {
+          "method": "DELETE",
+          "summary": "Delete Wimax",
+          "notes": "",
+          "type": "void",
+          "nickname": "deleteWimax",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "Wimax to be deleted in jason format",
+              "required": true,
+              "type": "Wimax",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Wimax not found"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Wimax": {
+      "id": "Wimax",
+      "properties": {
+        "base_model": {
+          "type": "string"
+        },
+        "vendor": {
+          "type": "string"
+        },
+        "band": {
+          "type": "string"
+        },
+        "vlan": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,216 @@
+{
+  "apiVersion": "1.0.0",
+  "swaggerVersion": "1.2",
+  "basePath": "#{@@basepath}",
+  "resourcePath": "/channels",
+  "produces": [
+    "application/json"
+  ],
+  "authorizations": {},
+  "apis": [
+    {
+      "path": "/channels",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find channel by uuid",
+          "notes": "",
+          "type": "Channel",
+          "nickname": "getChannelByUUID",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "uuid",
+              "description": "uuID of channel that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/channels",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find Channel by Name",
+          "notes": "",
+          "type": "Channel",
+          "nickname": "getChannelByName",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "name",
+              "description": "Name of Channel that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid Name supplied"
+            },
+            {
+              "code": 404,
+              "message": "Channel not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/channels",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Create a resource of type Channel",
+          "notes": "",
+          "type": "void",
+          "nickname": "placeChannel",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "order placed for creating a Channel",
+              "required": true,
+              "type": "Node",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid order"
+            }
+          ]
+        },
+        {
+          "method": "PUT",
+          "summary": "Update an existing Channel",
+          "notes": "",
+          "type": "void",
+          "nickname": "updateChannel",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "Channel that needs to be updated ",
+              "required": true,
+              "type": "Channel",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Channel not found"
+            },
+            {
+              "code": 405,
+              "message": "Validation exception"
+            }
+          ]
+        },
+        {
+          "method": "DELETE",
+          "summary": "Delete Channel",
+          "notes": "",
+          "type": "void",
+          "nickname": "deleteChannel",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "Channel to be deleted in jason format",
+              "required": true,
+              "type": "Channel",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Channel not found"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Channel": {
+      "id": "Channel",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "href": {
+          "type": "string"
+        },
+        "account": {
+          "$ref": "Account"
+        },
+        "urn":{
+          "type": "string",
+          "description": "Max length=>255",
+          "maximum": 255
+        },
+        "type": {
+          "type": "string"
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "description": "Channel Status",
+          "enum": [
+            "1",
+            "2",
+            "3"
+          ]
+        }
+      }
+    },
+    "Account": {
+      "id": "Account",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

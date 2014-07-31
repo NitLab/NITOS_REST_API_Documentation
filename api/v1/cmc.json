@@ -1,0 +1,449 @@
+{
+  "apiVersion": "1.0.0",
+  "swaggerVersion": "1.2",
+  "basePath": "#{@@basepath}",
+  "resourcePath": "/cmc",
+  "produces": [
+    "application/json"
+  ],
+  "authorizations": {},
+  "apis": [
+    {
+      "path": "/cmc",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find CMC by uuID",
+          "notes": "",
+          "type": "CMC",
+          "nickname": "getCmcByUUID",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "uuid",
+              "description": "uuID of CMC that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 404,
+              "message": "CMC not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cmc",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find CMC by Name",
+          "notes": "",
+          "type": "CMC",
+          "nickname": "getCmcByName",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "name",
+              "description": "Name of CMC that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 404,
+              "message": "CMC not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/cmc",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Create a resource of type CMC",
+          "notes": "",
+          "type": "void",
+          "nickname": "placeCmc",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "order placed for creating a CMC",
+              "required": true,
+              "type": "CMC",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid order"
+            }
+          ]
+        },
+        {
+          "method": "PUT",
+          "summary": "Update an existing CMC",
+          "notes": "",
+          "type": "void",
+          "nickname": "updateCmc",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "CMC that needs to be updated ",
+              "required": true,
+              "type": "CMC",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "CMC not found"
+            },
+            {
+              "code": 405,
+              "message": "Validation exception"
+            }
+          ]
+        },
+        {
+          "method": "DELETE",
+          "summary": "Delete CMC",
+          "notes": "",
+          "type": "void",
+          "nickname": "deleteCmc",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "CMC to be deleted in jason format",
+              "required": true,
+              "type": "CMC",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Channel not found"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "CMC": {
+      "uuid": "CMC",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        },
+        "href": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "account": {
+          "$ref": "Account"
+        },
+        "node": {
+          "$ref": "Node"
+        },
+        "type": {
+          "type": "string"
+        },
+        "mac": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "ip": {
+          "$ref": "IP"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "description": "CMC Status",
+          "enum": [
+            "placed",
+            "approved",
+            "delivered"
+          ]
+        }
+      }
+    },
+    "Node": {
+      "id": "Node",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        },
+        "account":{
+          "$ref": "Account"
+        },
+        "href": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "interfaces": {
+          "$ref": "Interface"
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "urn":{
+          "type": "string",
+          "description": "Max length=>255",
+          "maximum": 255
+        },
+        "status": {
+          "type": "string",
+          "description": "Node Status",
+          "enum": [
+            "unknown",
+            "ready"            
+          ]
+        },
+        "exclusive": {
+          "type": "boolean"
+        },
+        "disk": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "cmc": {
+          "$ref": "CMC"
+        },
+        "cpu": {
+          "type": "Cpu"
+        },
+        "ram": {
+          "type": "string"
+        },
+        "ram_type": {
+          "type": "string"
+        },
+        "hd_capacity": {
+          "type": "string"
+        }
+      }
+    },
+    "Account": {
+      "uuid": "Account",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "IP": {
+      "uuid": "IP",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "netmask": {
+          "type": "string"
+        },
+        "ip_type": {
+          "type": "string",
+          "description": "type of ip",
+          "enum": [
+            "ipv4",
+            "ipv6"
+          ]
+        },
+        "interface": {
+          "$ref": "Interface"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "ready"
+          ]
+        }
+      }
+    },
+    "Interface": {
+      "id": "Interface",
+      "properties": {     
+        "role": {
+          "type": "string"
+        },
+        "component": {
+          "$ref": "Component"
+        },
+        "channel": {
+          "$ref": "Channel"
+        },
+        "mac": {
+          "type": "string"
+        },
+        "ip": {
+          "$ref": "IP"
+        },
+        "description": {
+          "type": "string"
+        },
+        "link": {
+          "$ref": "Link"
+        }
+      }
+    },
+    "Cpu": {
+      "id": "Cpu",
+      "properties": {
+        "cpu_type": {
+          "type": "string"
+        },
+        "cores": {
+          "type": "string"
+        },
+        "threads": {
+          "type": "string"
+        },
+        "cache_11": {
+          "type": "string"
+        },
+        "cache_12": {
+          "type": "string"
+        }
+      }
+    },
+    "Link": {
+      "id": "Link",
+      "properties": {
+        "link_type": {
+          "type": "string"
+        },
+        "interfaces": {
+          "$ref": "Interface"
+        }
+      }
+    },
+    "Component": {
+      "id": "Component",
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "exclusive": {
+          "type": "string"
+        },
+        "available": {
+          "type": "string"
+        }
+      }
+    },
+    "Channel": {
+      "id": "Channel",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "href": {
+          "type": "string"
+        },
+        "account": {
+          "$ref": "Account"
+        },
+        "urn":{
+          "type": "string",
+          "description": "Max length=>255",
+          "maximum": 255
+        },
+        "type": {
+          "type": "string"
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "description": "Channel Status",
+          "enum": [
+            "1",
+            "2",
+            "3"
+          ]
+        }
+      }
+    }
+  }
+}

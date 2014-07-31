@@ -1,0 +1,253 @@
+{
+  "apiVersion": "1.0.0",
+  "swaggerVersion": "1.2",
+  "basePath": "#{@@basepath}",
+  "resourcePath": "/leases",
+  "produces": [
+    "application/json"
+  ],
+  "authorizations": {},
+  "apis": [
+    {
+      "path": "/leases",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find Lease by uuID",
+          "notes": "",
+          "type": "Lease",
+          "nickname": "getLeaseByUUID",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "uuid",
+              "description": "uuID of Lease that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Lease not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/leases",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find Lease by Name",
+          "notes": "",
+          "type": "Lease",
+          "nickname": "getLeaseByName",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "name",
+              "description": "Name of Lease that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid Name supplied"
+            },
+            {
+              "code": 404,
+              "message": "Lease not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/leases",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Create a resource of type Lease",
+          "notes": "",
+          "type": "void",
+          "nickname": "placeLease",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "order placed for creating a Lease",
+              "required": true,
+              "type": "Lease",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid order"
+            }
+          ]
+        },
+        {
+          "method": "PUT",
+          "summary": "Update an existing Lease",
+          "notes": "",
+          "type": "void",
+          "nickname": "updateLease",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "Lease that needs to be updated ",
+              "required": true,
+              "type": "Lease",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Lease not found"
+            },
+            {
+              "code": 405,
+              "message": "Validation exception"
+            }
+          ]
+        },
+        {
+          "method": "DELETE",
+          "summary": "Delete Lease",
+          "notes": "",
+          "type": "void",
+          "nickname": "deleteLease",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "Lease to be deleted in jason format",
+              "required": true,
+              "type": "Lease",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Lease not found"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Lease": {
+      "uuid": "Lease",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "href": {
+          "type": "string"
+        },
+        "account": {
+          "$ref": "Account"
+        },
+        "valid_from": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "valid_until": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type":{
+          "type": "string"
+        },
+        "components": {
+          "$ref": "Components"
+        },
+        "status": {
+          "type": "string",
+          "description": "Lease Status",
+          "enum": [
+            "accepted",
+            "past",
+            "cancelled",
+            "pending"
+          ]
+        }
+      }
+    },
+    "Account": {
+      "id": "Account",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "Components": {
+      "id": "Components",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "exclusive": {
+          "type": "string"
+        },
+        "available": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

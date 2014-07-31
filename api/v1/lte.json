@@ -1,0 +1,237 @@
+{
+  "apiVersion": "1.0.0",
+  "swaggerVersion": "1.2",
+  "basePath": "#{@@basepath}",
+  "resourcePath": "/lte",
+  "produces": [
+    "application/json"
+  ],
+  "authorizations": {},
+  "apis": [
+    {
+      "path": "/lte",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find Lte by uuID",
+          "notes": "",
+          "type": "Lte",
+          "nickname": "getLteByUUID",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "uuid",
+              "description": "uuID of Lte that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Lte not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/lte",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find Lte by Name",
+          "notes": "",
+          "type": "Lte",
+          "nickname": "getLteByName",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "name",
+              "description": "Name of Lte that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid Name supplied"
+            },
+            {
+              "code": 404,
+              "message": "Lte not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/lte",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Create a resource of type Lte",
+          "notes": "",
+          "type": "void",
+          "nickname": "placeLte",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "order placed for creating a Lte",
+              "required": true,
+              "type": "Lte",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid order"
+            }
+          ]
+        },
+        {
+          "method": "PUT",
+          "summary": "Update an existing Lte",
+          "notes": "",
+          "type": "void",
+          "nickname": "updateLte",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "Lte that needs to be updated ",
+              "required": true,
+              "type": "Lte",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Lte not found"
+            },
+            {
+              "code": 405,
+              "message": "Validation exception"
+            }
+          ]
+        },
+        {
+          "method": "DELETE",
+          "summary": "Delete Lte",
+          "notes": "",
+          "type": "void",
+          "nickname": "deleteLte",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "Lte to be deleted in jason format",
+              "required": true,
+              "type": "Lte",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Lte not found"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Lte": {
+      "id": "Lte",
+      "properties": {
+        "base_model": {
+          "type": "string"
+        },
+        "vendor": {
+          "type": "string"
+        },
+        "band": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string"
+        },
+        "ip_ap": {
+          "$ref": "IP"
+        },
+        "ip_epc": {
+          "$ref": "IP"
+        },
+        "apn": {
+          "type": "string"
+        },
+        "ip_pdn_gw": {
+          "$ref": "IP"
+        }
+      }
+    },
+    "IP": {
+      "id": "IP",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "netmask": {
+          "type": "string"
+        },
+        "ip_type": {
+          "type": "string",
+          "description": "type of ip",
+          "enum": [
+            "ipv4",
+            "ipv6"
+          ]
+        },
+        "domain": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "ready"
+          ]
+        }
+      }
+    }
+  }
+}

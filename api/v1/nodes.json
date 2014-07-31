@@ -1,0 +1,369 @@
+{
+  "apiVersion": "1.0.0",
+  "swaggerVersion": "1.2",
+  "basePath": "#{@@basepath}",
+  "resourcePath": "/nodes",
+  "produces": [
+    "application/json"
+  ],
+  "authorizations": {},
+  "apis": [
+    {
+      "path": "/nodes",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find node by uuID",
+          "notes": "",
+          "type": "Node",
+          "nickname": "getNodeByUUID",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "uuid",
+              "description": "uuID of Node that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Node not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/nodes",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find node by Name",
+          "notes": "",
+          "type": "Node",
+          "nickname": "getNodeByName",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "name",
+              "description": "Name of Node that needs to be fetched",
+              "required": true,
+              "type": "string",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid Name supplied"
+            },
+            {
+              "code": 404,
+              "message": "Node not found"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/nodes",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Create a resource of type Node",
+          "notes": "",
+          "type": "void",
+          "nickname": "placeNode",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "order placed for creating a Node",
+              "required": true,
+              "type": "Node",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid order"
+            }
+          ]
+        },
+        {
+          "method": "PUT",
+          "summary": "Update an existing Node",
+          "notes": "",
+          "type": "void",
+          "nickname": "updateNode",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "Node that needs to be updated ",
+              "required": true,
+              "type": "Node",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Node not found"
+            },
+            {
+              "code": 405,
+              "message": "Validation exception"
+            }
+          ]
+        },
+        {
+          "method": "DELETE",
+          "summary": "Delete Node",
+          "notes": "",
+          "type": "void",
+          "nickname": "deleteNode",
+          "authorizations": {},
+          "parameters": [
+            {
+              "name": "body",
+              "description": "Node to be deleted in jason format",
+              "required": true,
+              "type": "Node",
+              "paramType": "body"
+            
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Node not found"
+            },
+            {
+            	"code": 405,
+            	"message": "Validation exception"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Node": {
+      "id": "Node",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        },
+        "account":{
+          "$ref": "Account"
+        },
+        "href": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "interfaces": {
+          "$ref": "Interfaces"
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "urn":{
+          "type": "string",
+          "description": "Max length=>255",
+          "maximum": 255
+        },
+        "status": {
+          "type": "string",
+          "description": "Node Status",
+          "enum": [
+            "unknown",
+            "ready"            
+          ]
+        },
+        "exclusive": {
+          "type": "boolean"
+        },
+        "disk": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "cmc": {
+          "$ref": "ChasisManagerCard"
+        },
+        "cpu": {
+          "type": "Cpu"
+        },
+        "ram": {
+          "type": "string"
+        },
+        "ram_type": {
+          "type": "string"
+        },
+        "hd_capacity": {
+          "type": "string"
+        }
+      }
+    },
+    "ChasisManagerCard":{
+      "id": "ChasisManagerCard",
+      "properties":{
+        "uuid": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "account": {
+          "$ref": "Account"
+        },
+        "type": {
+          "type": "string"
+        },
+        "mac": {
+          "type": "string"
+        },
+        "ip": {
+          "$ref": "IP"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "description": "status of cmc",
+          "enum": [
+            "unknown",
+            "ready"
+          ]
+        }
+      }
+    },
+    "Account": {
+      "id": "Account",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "Cpu": {
+      "id": "Cpu",
+      "properties": {
+        "cpu_type": {
+          "type": "string"
+        },
+        "cores": {
+          "type": "string"
+        },
+        "threads": {
+          "type": "string"
+        },
+        "cache_11": {
+          "type": "string"
+        },
+        "cache_12": {
+          "type": "string"
+        }
+      }
+    },
+    "Interfaces": {
+      "id": "Interfaces",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "ip": {
+          "$ref": "IP"
+        }   
+      }
+    },
+    "IP": {
+      "id": "IP",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "netmask": {
+          "type": "string"
+        },
+        "ip_type": {
+          "type": "string",
+          "description": "type of ip",
+          "enum": [
+            "ipv4",
+            "ipv6"
+          ]
+        },
+        "domain": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "ready"
+          ]
+        }
+      }
+    }
+  }
+}

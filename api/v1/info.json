@@ -1,0 +1,37 @@
+{	
+  "apiVersion": "1.0.0",
+	"swaggerVersion": "1.2",
+	"authorizations":{},
+	"produces": ["application/json"],
+	"apis":[		
+		{"path": "/nodes",
+		  "description": "A Node is a physical machine that can be used in an experiment."
+    },
+    {"path": "/channels",
+      "description": "Channels can be all the frequency channels described in wireless protocols like 802.11."
+    },
+    {"path": "/leases",
+      "description": "Leasing a resource is equivalent to reserving a resource. A Lease is associated with a time slot (validfrom, validuntil), an account and a resource."
+    },
+    {"path": "/cmc",
+      "description": "Chassis Manager Cards are combined of a general purpose microcontroller, an Ethernet microcontroller and a relays circuit."
+    },
+    {"path": "/openflow",
+      "description": "OpenFlow is an emerging new technology, the most widely used Software Defined Networking (SDN) enabler."
+    },
+    {"path": "/lte",
+      "description": "Lte Base stations."
+    },
+    {"path": "/wimax",
+      "description": "Wimax Base Stations."
+    }
+	],
+    "info": {
+		"title": "NITlab Sample App",
+		"description": "This is the reference document for the REST API provided by NITOS Broker. This REST API can be used by developers who need access to NITOS Broker inventory with other standalone or web applications, and administrators who want to script interactions with the Testbeds Servers.",
+    "termsOfServiceUrl": "",
+    "contact": "",
+    "license": "",
+    "licenseUrl": ""}
+
+}
