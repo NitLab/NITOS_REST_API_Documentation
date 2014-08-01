@@ -1,4 +1,4 @@
-#myapp2.rb
+#api_doc_server.rb
 require 'sinatra'
 require 'json'
 

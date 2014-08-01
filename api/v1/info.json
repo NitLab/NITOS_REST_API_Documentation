@@ -23,7 +23,7 @@
       "description": "Lte Base stations."
     },
     {"path": "/wimax",
-      "description": "Wimax Base Stations."
+      "description": "Wimax Base stations."
     }
 	],
     "info": {
@@ -32,6 +32,6 @@
     "termsOfServiceUrl": "",
     "contact": "",
     "license": "",
-    "licenseUrl": ""}
-
+    "licenseUrl": ""
+  }
 }

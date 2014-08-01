@@ -188,9 +188,8 @@
           "type": "string",
           "description": "Channel Status",
           "enum": [
-            "1",
-            "2",
-            "3"
+            "unknown",
+            "ready"
           ]
         }
       }
