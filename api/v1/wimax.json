@@ -69,6 +69,21 @@
               "message": "Wimax not found"
             }
           ]
+        },
+        {
+          "method": "GET",
+          "summary": "Get all wimax",
+          "notes": "",
+          "type": "Wimax",
+          "nickname": "getAllWimax",
+          "authorizations": {},
+          "parameters": [],
+          "responseMessages": [
+            {
+              "code": 404,
+              "message": "None wimax found"
+            }
+          ]
         }
       ]
     },

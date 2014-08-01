@@ -69,6 +69,21 @@
               "message": "Lte not found"
             }
           ]
+        },
+        {
+          "method": "GET",
+          "summary": "Get all lte",
+          "notes": "",
+          "type": "Lte",
+          "nickname": "getAllLte",
+          "authorizations": {},
+          "parameters": [],
+          "responseMessages": [
+            {
+              "code": 404,
+              "message": "None lte found"
+            }
+          ]
         }
       ]
     },

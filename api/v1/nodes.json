@@ -69,6 +69,21 @@
               "message": "Node not found"
             }
           ]
+        },
+        {
+          "method": "GET",
+          "summary": "Get all nodes",
+          "notes": "",
+          "type": "Node",
+          "nickname": "getAllNodes",
+          "authorizations": {},
+          "parameters": [],
+          "responseMessages": [
+            {
+              "code": 404,
+              "message": "None node found"
+            }
+          ]
         }
       ]
     },

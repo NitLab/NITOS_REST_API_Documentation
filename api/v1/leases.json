@@ -69,6 +69,21 @@
               "message": "Lease not found"
             }
           ]
+        },
+        {
+          "method": "GET",
+          "summary": "Get all leases",
+          "notes": "",
+          "type": "Lease",
+          "nickname": "getAllLeases",
+          "authorizations": {},
+          "parameters": [],
+          "responseMessages": [
+            {
+              "code": 404,
+              "message": "None lease found"
+            }
+          ]
         }
       ]
     },

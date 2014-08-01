@@ -59,6 +59,21 @@
               "message": "Channel not found"
             }
           ]
+        },
+        {
+          "method": "GET",
+          "summary": "Get all channels",
+          "notes": "",
+          "type": "Channel",
+          "nickname": "getAllChannels",
+          "authorizations": {},
+          "parameters": [],
+          "responseMessages": [
+            {
+              "code": 404,
+              "message": "None channel found"
+            }
+          ]
         }
       ]
     },
