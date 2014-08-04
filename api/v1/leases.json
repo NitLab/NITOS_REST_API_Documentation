@@ -146,7 +146,7 @@
         },
         {
           "method": "DELETE",
-          "summary": "Delete Lease",
+          "summary": "Delete a Lease",
           "notes": "",
           "type": "void",
           "nickname": "deleteLease",

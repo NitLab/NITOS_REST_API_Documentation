@@ -146,7 +146,7 @@
         },
         {
           "method": "DELETE",
-          "summary": "Delete Lte",
+          "summary": "Delete a Lte",
           "notes": "",
           "type": "void",
           "nickname": "deleteLte",

@@ -146,7 +146,7 @@
         },
         {
           "method": "DELETE",
-          "summary": "Delete Wimax",
+          "summary": "Delete a Wimax",
           "notes": "",
           "type": "void",
           "nickname": "deleteWimax",

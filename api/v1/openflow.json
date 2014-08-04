@@ -146,7 +146,7 @@
         },
         {
           "method": "DELETE",
-          "summary": "Delete Openflow switch",
+          "summary": "Delete an Openflow switch",
           "notes": "",
           "type": "void",
           "nickname": "deleteOpenflow",

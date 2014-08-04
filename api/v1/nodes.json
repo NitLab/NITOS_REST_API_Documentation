@@ -146,7 +146,7 @@
         },
         {
           "method": "DELETE",
-          "summary": "Delete Node",
+          "summary": "Delete a Node",
           "notes": "",
           "type": "void",
           "nickname": "deleteNode",

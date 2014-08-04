@@ -1,0 +1,11 @@
+#configuration
+
+
+:basepath: "https://10.64.44.12:8001/resources"
+
+:port: 4000
+
+:ssl:
+  :enabled: true
+  :cert_chain_file: C:\Users\Chris\Documents\GitHub\rest_api_documentation\am.pem
+  :private_key_file: C:\Users\Chris\Documents\GitHub\rest_api_documentation\am_key.pem

@@ -146,7 +146,7 @@
         },
         {
           "method": "DELETE",
-          "summary": "Delete CMC",
+          "summary": "Delete a CMC",
           "notes": "",
           "type": "void",
           "nickname": "deleteCmc",

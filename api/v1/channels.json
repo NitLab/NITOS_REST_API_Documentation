@@ -136,7 +136,7 @@
         },
         {
           "method": "DELETE",
-          "summary": "Delete Channel",
+          "summary": "Delete a Channel",
           "notes": "",
           "type": "void",
           "nickname": "deleteChannel",
