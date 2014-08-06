@@ -13,6 +13,21 @@
       "operations": [
         {
           "method": "GET",
+          "summary": "Get all leases",
+          "notes": "",
+          "type": "Lease",
+          "nickname": "getAllLeases",
+          "authorizations": {},
+          "parameters": [],
+          "responseMessages": [
+            {
+              "code": 404,
+              "message": "None lease found"
+            }
+          ]
+        },
+        {
+          "method": "GET",
           "summary": "Find Lease by uuID",
           "notes": "",
           "type": "Lease",
@@ -37,12 +52,7 @@
               "message": "Lease not found"
             }
           ]
-        }
-      ]
-    },
-    {
-      "path": "/leases",
-      "operations": [
+        },
         {
           "method": "GET",
           "summary": "Find Lease by Name",
@@ -69,21 +79,6 @@
               "message": "Lease not found"
             }
           ]
-        },
-        {
-          "method": "GET",
-          "summary": "Get all leases",
-          "notes": "",
-          "type": "Lease",
-          "nickname": "getAllLeases",
-          "authorizations": {},
-          "parameters": [],
-          "responseMessages": [
-            {
-              "code": 404,
-              "message": "None lease found"
-            }
-          ]
         }
       ]
     },
@@ -93,7 +88,7 @@
         {
           "method": "POST",
           "summary": "Create a resource of type Lease",
-          "notes": "",
+          "notes": "Give only uuid or name in the account and oComponent body (uuid preferable)",
           "type": "void",
           "nickname": "placeLease",
           "authorizations": {},
@@ -102,7 +97,7 @@
               "name": "body",
               "description": "order placed for creating a Lease",
               "required": true,
-              "type": "Lease",
+              "type": "Clease",
               "paramType": "body"
             }
           ],
@@ -116,7 +111,7 @@
         {
           "method": "PUT",
           "summary": "Update an existing Lease",
-          "notes": "",
+          "notes": "Give the uuid and the parameters you want to change in json's body",
           "type": "void",
           "nickname": "updateLease",
           "authorizations": {},
@@ -137,17 +132,13 @@
             {
               "code": 404,
               "message": "Lease not found"
-            },
-            {
-              "code": 405,
-              "message": "Validation exception"
             }
           ]
         },
         {
           "method": "DELETE",
           "summary": "Delete a Lease",
-          "notes": "",
+          "notes": "Give only the uuid of the lease you want to delete in json's body'",
           "type": "void",
           "nickname": "deleteLease",
           "authorizations": {},
@@ -156,7 +147,7 @@
               "name": "body",
               "description": "Lease to be deleted in jason format",
               "required": true,
-              "type": "Lease",
+              "type": "DLease",
               "paramType": "body"
             }
           ],
@@ -204,7 +195,10 @@
           "type": "string"
         },
         "components": {
-          "$ref": "Components"
+          "type": "array",
+          "items": {
+            "$ref": "oComponent"
+          }
         },
         "status": {
           "type": "string",
@@ -235,8 +229,8 @@
         }
       }
     },
-    "Components": {
-      "id": "Components",
+    "oComponent": {
+      "id": "oComponent",
       "properties": {
         "uuid": {
           "type": "string"
@@ -263,6 +257,63 @@
           "type": "string"
         }
       }
-    }
+    },
+    "Clease": {
+      "uuid": "Clease",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "account": {
+          "$ref": "Caccount"
+        },
+        "valid_from": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "valid_until": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "CoComponent"
+          }
+        }
+      }
+    },
+    "Caccount": {
+      "id": "Caccount",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "CoComponent": {
+      "id": "CoComponent",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "DLease": {
+      "id": "DLease",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        }
+      }
+    }  
   }
 }

@@ -13,6 +13,21 @@
       "operations": [
         {
           "method": "GET",
+          "summary": "Get all channels",
+          "notes": "",
+          "type": "Channel",
+          "nickname": "getAllChannels",
+          "authorizations": {},
+          "parameters": [],
+          "responseMessages": [
+            {
+              "code": 404,
+              "message": "None channel found"
+            }
+          ]
+        },
+        {
+          "method": "GET",
           "summary": "Find channel by uuid",
           "notes": "",
           "type": "Channel",
@@ -27,12 +42,7 @@
               "paramType": "query"
             }
           ]
-        }
-      ]
-    },
-    {
-      "path": "/channels",
-      "operations": [
+        },
         {
           "method": "GET",
           "summary": "Find Channel by Name",
@@ -59,21 +69,6 @@
               "message": "Channel not found"
             }
           ]
-        },
-        {
-          "method": "GET",
-          "summary": "Get all channels",
-          "notes": "",
-          "type": "Channel",
-          "nickname": "getAllChannels",
-          "authorizations": {},
-          "parameters": [],
-          "responseMessages": [
-            {
-              "code": 404,
-              "message": "None channel found"
-            }
-          ]
         }
       ]
     },
@@ -84,7 +79,7 @@
           "method": "POST",
           "summary": "Create a resource of type Channel",
           "notes": "",
-          "type": "void",
+          "type": "Channel",
           "nickname": "placeChannel",
           "authorizations": {},
           "parameters": [
@@ -92,7 +87,7 @@
               "name": "body",
               "description": "order placed for creating a Channel",
               "required": true,
-              "type": "Node",
+              "type": "Cchannel",
               "paramType": "body"
             }
           ],
@@ -106,7 +101,7 @@
         {
           "method": "PUT",
           "summary": "Update an existing Channel",
-          "notes": "",
+          "notes": "Give the uuid and the parameters you want to change in json's body",
           "type": "void",
           "nickname": "updateChannel",
           "authorizations": {},
@@ -127,17 +122,13 @@
             {
               "code": 404,
               "message": "Channel not found"
-            },
-            {
-              "code": 405,
-              "message": "Validation exception"
             }
           ]
         },
         {
           "method": "DELETE",
           "summary": "Delete a Channel",
-          "notes": "",
+          "notes": "Give only the uuid of the channel you want to delete in json's body",
           "type": "void",
           "nickname": "deleteChannel",
           "authorizations": {},
@@ -146,7 +137,7 @@
               "name": "body",
               "description": "Channel to be deleted in jason format",
               "required": true,
-              "type": "Channel",
+              "type": "DChannel",
               "paramType": "body"
             }
           ],
@@ -179,6 +170,12 @@
         "href": {
           "type": "string"
         },
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "Interface"
+          }
+        },
         "account": {
           "$ref": "Account"
         },
@@ -209,8 +206,34 @@
         }
       }
     },
-    "Account": {
-      "id": "Account",
+    "Interface": {
+      "id": "Interface",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "ip": {
+          "$ref": "ip"
+        }  ,
+        "description": {
+          "type": "string"
+        },
+        "link": {
+          "$ref": "Link"
+        } 
+      }
+    },
+    "ip": {
+      "id": "ip",
       "properties": {
         "uuid": {
           "type": "string"
@@ -223,8 +246,114 @@
         },
         "type": {
           "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "netmask": {
+          "type": "string"
+        },
+        "ip_type": {
+          "type": "string",
+          "description": "type of ip",
+          "enum": [
+            "ipv4",
+            "ipv6"
+          ]
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "ready"
+          ]
         }
       }
-    }
+    },
+    "Link": {
+      "id": "Link",
+      "properties": {
+        "link_type": {
+          "type": "string"
+        },
+        "interfaces": {
+          "$ref": "Interface"
+        }
+      }
+    },
+    "Cchannel": {
+      "id": "Cchannel",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "Cinterface"
+          }
+        },
+        "urn": {
+          "type": "string",
+          "description": "Max length=>255",
+          "maximum": 255
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        }
+      }
+    },
+    "Cinterface": {
+      "id": "Cinterface",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "ip": {
+          "$ref": "Cip"
+        }   
+      }
+    },
+    "Cip": {
+      "id": "Cip",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "netmask": {
+          "type": "string"
+        },
+        "ip_type": {
+          "type": "string",
+          "description": "type of ip",
+          "enum": [
+            "ipv4",
+            "ipv6"
+          ]
+        }
+      }
+    },
+    "DChannel": {
+      "id": "DChannel",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        }
+      }
+    }  
   }
 }

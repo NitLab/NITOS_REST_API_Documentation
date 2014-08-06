@@ -13,6 +13,21 @@
       "operations": [
         {
           "method": "GET",
+          "summary": "Get all cmc",
+          "notes": "",
+          "type": "CMC",
+          "nickname": "getAllCMC",
+          "authorizations": {},
+          "parameters": [],
+          "responseMessages": [
+            {
+              "code": 404,
+              "message": "None cmc found"
+            }
+          ]
+        },
+        {
+          "method": "GET",
           "summary": "Find CMC by uuID",
           "notes": "",
           "type": "CMC",
@@ -37,12 +52,7 @@
               "message": "CMC not found"
             }
           ]
-        }
-      ]
-    },
-    {
-      "path": "/cmc",
-      "operations": [
+        },
         {
           "method": "GET",
           "summary": "Find CMC by Name",
@@ -69,21 +79,6 @@
               "message": "CMC not found"
             }
           ]
-        },
-        {
-          "method": "GET",
-          "summary": "Get all cmc",
-          "notes": "",
-          "type": "CMC",
-          "nickname": "getAllCMC",
-          "authorizations": {},
-          "parameters": [],
-          "responseMessages": [
-            {
-              "code": 404,
-              "message": "None cmc found"
-            }
-          ]
         }
       ]
     },
@@ -94,7 +89,7 @@
           "method": "POST",
           "summary": "Create a resource of type CMC",
           "notes": "",
-          "type": "void",
+          "type": "CMC",
           "nickname": "placeCmc",
           "authorizations": {},
           "parameters": [
@@ -102,7 +97,7 @@
               "name": "body",
               "description": "order placed for creating a CMC",
               "required": true,
-              "type": "CMC",
+              "type": "Ccmc",
               "paramType": "body"
             }
           ],
@@ -116,7 +111,7 @@
         {
           "method": "PUT",
           "summary": "Update an existing CMC",
-          "notes": "",
+          "notes": "Give the uuid and the parameters you want to change in json's body",
           "type": "void",
           "nickname": "updateCmc",
           "authorizations": {},
@@ -137,17 +132,13 @@
             {
               "code": 404,
               "message": "CMC not found"
-            },
-            {
-              "code": 405,
-              "message": "Validation exception"
             }
           ]
         },
         {
           "method": "DELETE",
           "summary": "Delete a CMC",
-          "notes": "",
+          "notes": "Give only the uuid of the CMC you want to delete in json's body",
           "type": "void",
           "nickname": "deleteCmc",
           "authorizations": {},
@@ -156,7 +147,7 @@
               "name": "body",
               "description": "CMC to be deleted in jason format",
               "required": true,
-              "type": "CMC",
+              "type": "DCMC",
               "paramType": "body"
             }
           ],
@@ -343,14 +334,17 @@
         }
       }
     },
-    "Interface": {
-      "id": "Interface",
+    "interface": {
+      "id": "interface",
       "properties": {     
         "role": {
           "type": "string"
         },
-        "component": {
-          "$ref": "Component"
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "oComponent"
+          }
         },
         "channel": {
           "$ref": "Channel"
@@ -396,7 +390,10 @@
           "type": "string"
         },
         "interfaces": {
-          "$ref": "Interface"
+          "type": "array",
+          "items": {
+            "$ref": "interface"
+          }
         }
       }
     },
@@ -457,6 +454,85 @@
           ]
         }
       }
-    }
+    },
+    "Ccmc": {
+      "uuid": "Ccmc",
+      "properties": {        
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "node": {
+          "$ref": "CNode"
+        },
+        "mac": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "ip": {
+          "$ref": "Cip"
+        }
+      }
+    },
+    "CNode": {
+      "id": "CNode",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    "Cinterface": {
+      "id": "Cinterface",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "ip": {
+          "$ref": "Cip"
+        }   
+      }
+    },
+    "Cip": {
+      "id": "Cip",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "netmask": {
+          "type": "string"
+        },
+        "ip_type": {
+          "type": "string",
+          "description": "type of ip",
+          "enum": [
+            "ipv4",
+            "ipv6"
+          ]
+        }
+      }
+    },
+    "DCMC": {
+      "id": "DCMC",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        }
+      }
+    }  
   }
 }

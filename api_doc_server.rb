@@ -6,8 +6,6 @@ require 'yaml'
 
 
 
-
-
 class DocServer < Sinatra::Base
 
   @@basepath = "https://10.64.44.12:8001/resources"
@@ -32,9 +30,9 @@ class DocServer < Sinatra::Base
 
   get '/api/api-docs' do 
 
-  content_type :json
+    content_type :json
 
-  File.read('api/v1/info.json')
+    File.read('api/v1/info.json')
 
   end
 
@@ -43,15 +41,16 @@ class DocServer < Sinatra::Base
 
   get '/api/api-docs/nodes' do
 
-  content_type :json
+    content_type :json
 
-  nodes = File.read('api/v1/nodes.json')
+    nodes = File.read('api/v1/nodes.json')
 
-  nodes = JSON.parse(nodes)
+    nodes = JSON.parse(nodes)
 
-  nodes['basePath'] = @@basepath
+    nodes['basePath'] = @@basepath
 
-  nodes.to_json
+    nodes.to_json
+
   end
 
 
@@ -59,15 +58,15 @@ class DocServer < Sinatra::Base
 
   get '/api/api-docs/channels' do
 
-  content_type :json
+    content_type :json
 
-  channels = File.read('api/v1/channels.json')
+    channels = File.read('api/v1/channels.json')
 
-  channels = JSON.parse(channels)
+    channels = JSON.parse(channels)
 
-  channels['basePath'] = @@basepath
+    channels['basePath'] = @@basepath
 
-  channels.to_json
+    channels.to_json
 
   end
 
@@ -76,15 +75,15 @@ class DocServer < Sinatra::Base
 
   get '/api/api-docs/leases' do
 
-  content_type :json
+    content_type :json
 
-  leases = File.read('api/v1/leases.json')
+    leases = File.read('api/v1/leases.json')
 
-  leases = JSON.parse(leases)
+    leases = JSON.parse(leases)
 
-  leases['basePath'] = @@basepath
+    leases['basePath'] = @@basepath
 
-  leases.to_json
+    leases.to_json
 
   end
 
@@ -93,15 +92,15 @@ class DocServer < Sinatra::Base
 
   get '/api/api-docs/cmc' do
 
-  content_type :json
+    content_type :json
 
-  cmc = File.read('api/v1/cmc.json')
+    cmc = File.read('api/v1/cmc.json')
 
-  cmc = JSON.parse(cmc)
+    cmc = JSON.parse(cmc)
 
-  cmc['basePath'] = @@basepath
+    cmc['basePath'] = @@basepath
 
-  cmc.to_json
+    cmc.to_json
 
   end
 
@@ -110,15 +109,15 @@ class DocServer < Sinatra::Base
 
   get '/api/api-docs/openflow' do
 
-  content_type :json
+    content_type :json
 
-  openflow = File.read('api/v1/openflow.json')
+    openflow = File.read('api/v1/openflow.json')
 
-  openflow = JSON.parse(openflow)
+    openflow = JSON.parse(openflow)
 
-  openflow['basePath'] = @@basepath
+    openflow['basePath'] = @@basepath
 
-  openflow.to_json
+    openflow.to_json
 
   end
 
@@ -127,15 +126,15 @@ class DocServer < Sinatra::Base
 
   get '/api/api-docs/lte' do
 
-  content_type :json
+    content_type :json
 
-  lte = File.read('api/v1/lte.json')
+    lte = File.read('api/v1/lte.json')
 
-  lte = JSON.parse(lte)
+    lte = JSON.parse(lte)
 
-  lte['basePath'] = @@basepath
+    lte['basePath'] = @@basepath
 
-  lte.to_json
+    lte.to_json
 
   end
 
@@ -144,15 +143,15 @@ class DocServer < Sinatra::Base
 
   get '/api/api-docs/wimax' do
 
-  content_type :json
+    content_type :json
 
-  wimax = File.read('api/v1/wimax.json')
+    wimax = File.read('api/v1/wimax.json')
 
-  wimax = JSON.parse(wimax)
+    wimax = JSON.parse(wimax)
 
-  wimax['basePath'] = @@basepath
+    wimax['basePath'] = @@basepath
 
-  wimax.to_json
+    wimax.to_json
 
   end
 
@@ -172,7 +171,6 @@ class DocServer < Sinatra::Base
       server.ssl = ssl[:enabled]
       server.ssl_options = ssl_options
     end
-
   end
 
 end

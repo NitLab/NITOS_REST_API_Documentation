@@ -13,6 +13,21 @@
       "operations": [
         {
           "method": "GET",
+          "summary": "Get all nodes",
+          "notes": "",
+          "type": "Node",
+          "nickname": "getAllNodes",
+          "authorizations": {},
+          "parameters": [],
+          "responseMessages": [
+            {
+              "code": 404,
+              "message": "None node found"
+            }
+          ]
+        },
+        {
+          "method": "GET",
           "summary": "Find node by uuID",
           "notes": "",
           "type": "Node",
@@ -37,12 +52,7 @@
               "message": "Node not found"
             }
           ]
-        }
-      ]
-    },
-    {
-      "path": "/nodes",
-      "operations": [
+        },
         {
           "method": "GET",
           "summary": "Find node by Name",
@@ -69,21 +79,6 @@
               "message": "Node not found"
             }
           ]
-        },
-        {
-          "method": "GET",
-          "summary": "Get all nodes",
-          "notes": "",
-          "type": "Node",
-          "nickname": "getAllNodes",
-          "authorizations": {},
-          "parameters": [],
-          "responseMessages": [
-            {
-              "code": 404,
-              "message": "None node found"
-            }
-          ]
         }
       ]
     },
@@ -94,7 +89,6 @@
           "method": "POST",
           "summary": "Create a resource of type Node",
           "notes": "",
-          "type": "void",
           "nickname": "placeNode",
           "authorizations": {},
           "parameters": [
@@ -102,7 +96,7 @@
               "name": "body",
               "description": "order placed for creating a Node",
               "required": true,
-              "type": "Node",
+              "type": "CNode",
               "paramType": "body"
             }
           ],
@@ -116,7 +110,7 @@
         {
           "method": "PUT",
           "summary": "Update an existing Node",
-          "notes": "",
+          "notes": "Give the uuid and the parameters you want to change in json's body",
           "type": "void",
           "nickname": "updateNode",
           "authorizations": {},
@@ -137,17 +131,13 @@
             {
               "code": 404,
               "message": "Node not found"
-            },
-            {
-              "code": 405,
-              "message": "Validation exception"
             }
           ]
         },
         {
           "method": "DELETE",
           "summary": "Delete a Node",
-          "notes": "",
+          "notes": "Give only the uuid of the node you want to delete in json's body",
           "type": "void",
           "nickname": "deleteNode",
           "authorizations": {},
@@ -156,7 +146,7 @@
               "name": "body",
               "description": "Node to be deleted in jason format",
               "required": true,
-              "type": "Node",
+              "type": "DNode",
               "paramType": "body"
             
             }
@@ -169,10 +159,6 @@
             {
               "code": 404,
               "message": "Node not found"
-            },
-            {
-            	"code": 405,
-            	"message": "Validation exception"
             }
           ]
         }
@@ -197,7 +183,10 @@
           "type": "string"
         },
         "interfaces": {
-          "$ref": "Interfaces"
+          "type": "array",
+          "items": {
+            "$ref": "Interface"
+          }
         },
         "name": {
           "type": "string",
@@ -227,6 +216,9 @@
         },
         "cmc": {
           "$ref": "ChasisManagerCard"
+        },
+        "domain": {
+          "type": "string"
         },
         "cpu": {
           "type": "Cpu"
@@ -264,11 +256,8 @@
           "type": "string"
         },
         "ip": {
-          "$ref": "IP"
-        },
-        "domain": {
-          "type": "string"
-        },
+          "$ref": "ip"
+        },        
         "available": {
           "type": "boolean"
         },
@@ -293,6 +282,9 @@
         },
         "type": {
           "type": "string"
+        },
+        "name": {
+          "type": "string"
         }
       }
     },
@@ -316,8 +308,8 @@
         }
       }
     },
-    "Interfaces": {
-      "id": "Interfaces",
+    "Interface": {
+      "id": "Interface",
       "properties": {
         "uuid": {
           "type": "string"
@@ -333,11 +325,17 @@
         },
         "ip": {
           "$ref": "IP"
-        }   
+        },
+        "description": {
+          "type": "string"
+        },
+        "link": {
+          "$ref": "Link"
+        }
       }
     },
-    "IP": {
-      "id": "IP",
+    "ip": {
+      "id": "ip",
       "properties": {
         "uuid": {
           "type": "string"
@@ -365,9 +363,6 @@
             "ipv6"
           ]
         },
-        "domain": {
-          "type": "string"
-        },
         "available": {
           "type": "boolean"
         },
@@ -379,6 +374,123 @@
           ]
         }
       }
-    }
+    },
+    "Link": {
+      "id": "Link",
+      "properties": {
+        "link_type": {
+          "type": "string"
+        },
+        "interfaces": {
+          "$ref": "Interface"
+        }
+      }
+    },
+    "CNode": {
+      "id": "CNode",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true
+        },      
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "Cinterface"
+          }
+        },        
+        "urn":{
+          "type": "string",
+          "description": "Max length=>255",
+          "maximum": 255
+        },        
+        "exclusive": {
+          "type": "boolean"
+        },
+        "disk": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "cmc": {
+          "$ref": "Ccmc"
+        },
+        "domain":{
+          "type": "string"
+        },
+        "cpu": {
+          "type": "Cpu"
+        },
+        "ram": {
+          "type": "string"
+        },
+        "ram_type": {
+          "type": "string"
+        },
+        "hd_capacity": {
+          "type": "string"
+        }
+      }
+    },
+    "Ccmc":{
+      "id": "Ccmc",
+      "properties":{        
+        "name": {
+          "type": "string"
+        },
+        "mac": {
+          "type": "string"
+        },
+        "ip": {
+          "$ref": "Cip"
+        }
+      }
+    },   
+    "Cinterface": {
+      "id": "Cinterface",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "ip": {
+          "$ref": "Cip"
+        }   
+      }
+    },
+    "Cip": {
+      "id": "Cip",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "netmask": {
+          "type": "string"
+        },
+        "ip_type": {
+          "type": "string",
+          "description": "type of ip",
+          "enum": [
+            "ipv4",
+            "ipv6"
+          ]
+        }
+      }
+    },
+    "DNode": {
+      "id": "DNode",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        }
+      }
+    }  
   }
 }

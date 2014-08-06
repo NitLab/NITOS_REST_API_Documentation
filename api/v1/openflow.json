@@ -13,6 +13,21 @@
       "operations": [
         {
           "method": "GET",
+          "summary": "Get all openflow switches",
+          "notes": "",
+          "type": "Openflow",
+          "nickname": "getAllOpenflow",
+          "authorizations": {},
+          "parameters": [],
+          "responseMessages": [
+            {
+              "code": 404,
+              "message": "None Openflow switch found"
+            }
+          ]
+        },
+        {
+          "method": "GET",
           "summary": "Find Openflow switch by uuID",
           "notes": "",
           "type": "Openflow",
@@ -37,12 +52,7 @@
               "message": "Openflow not found"
             }
           ]
-        }
-      ]
-    },
-    {
-      "path": "/openflow",
-      "operations": [
+        },
         {
           "method": "GET",
           "summary": "Find Openflow switch by Name",
@@ -69,21 +79,6 @@
               "message": "Openflow switch not found"
             }
           ]
-        },
-        {
-          "method": "GET",
-          "summary": "Get all openflow switches",
-          "notes": "",
-          "type": "Openflow",
-          "nickname": "getAllOpenflow",
-          "authorizations": {},
-          "parameters": [],
-          "responseMessages": [
-            {
-              "code": 404,
-              "message": "None Openflow switch found"
-            }
-          ]
         }
       ]
     },
@@ -94,7 +89,7 @@
           "method": "POST",
           "summary": "Create a resource of type Openflow switch",
           "notes": "",
-          "type": "void",
+          "type": "Openflow",
           "nickname": "placeOpenflow",
           "authorizations": {},
           "parameters": [
@@ -102,7 +97,7 @@
               "name": "body",
               "description": "order placed for creating an Openflow switch",
               "required": true,
-              "type": "Openflow",
+              "type": "Copenflow",
               "paramType": "body"
             }
           ],
@@ -116,7 +111,7 @@
         {
           "method": "PUT",
           "summary": "Update an existing Openflow switch",
-          "notes": "",
+          "notes": "Give the uuid and the parameters you want to change in json's body",
           "type": "void",
           "nickname": "updateOpenflow",
           "authorizations": {},
@@ -137,17 +132,13 @@
             {
               "code": 404,
               "message": "Openflow not found"
-            },
-            {
-              "code": 405,
-              "message": "Validation exception"
             }
           ]
         },
         {
           "method": "DELETE",
           "summary": "Delete an Openflow switch",
-          "notes": "",
+          "notes": "Give only the uuid of the Openflow switch you want to delete in json's body",
           "type": "void",
           "nickname": "deleteOpenflow",
           "authorizations": {},
@@ -156,7 +147,7 @@
               "name": "body",
               "description": "Openflow switch to be deleted in jason format",
               "required": true,
-              "type": "Openflow",
+              "type": "DOpenflow",
               "paramType": "body"
             }
           ],
@@ -178,6 +169,39 @@
     "Openflow": {
       "id": "Openflow",
       "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "urn":{
+          "type": "string",
+          "description": "Max length=>255",
+          "maximum": 255
+        },
+        "resource_type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "description": "Node Status",
+          "enum": [
+            "unknown",
+            "ready"            
+          ]
+        },
+        "domain" : {
+          "type": "string"
+        },
+        "exclusive": {
+          "type": "boolean"
+        },
+        "available": {
+          "type": "string"
+        },
         "hostname": {
           "type": "string"
         },
@@ -197,7 +221,10 @@
           "type": "string"
         },
         "interfaces":{
-          "$ref": "Interface"
+          "type": "array",
+          "items": {
+            "$ref": "Interface"
+          }
         },
         "of_controller_ip": {
           "type": "IP"
@@ -224,8 +251,11 @@
             "ipv6"
           ]
         },
-        "interface": {
-          "$ref": "Interface"
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "Interface"
+          }
         }
       }
     },
@@ -256,9 +286,104 @@
           "type": "string"
         },
         "interfaces": {
-          "$ref": "Interface"
+          "type": "array",
+          "items": {
+            "$ref": "Cinterface"
+          }
         }
       }
-    }
+    },
+    "Copenflow": {
+      "id": "Copenflow",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "urn":{
+          "type": "string",
+          "description": "Max length=>255",
+          "maximum": 255
+        },
+        "domain" : {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "switch_model": {
+          "type": "string"
+        },
+        "switch_type": {
+          "type": "string"
+        },
+        "openflow_version": {
+          "type": "string"
+        },
+        "switch_OS": {
+          "type": "string"
+        },
+        "datapath_id": {
+          "type": "string"
+        },
+        "interfaces":{
+          "type": "array",
+          "items": {
+            "$ref": "Cinterface"
+          }
+        },
+        "of_controller_ip": {
+          "type": "Cip"
+        },
+        "of_controller_port": {
+          "type": "string"
+        }
+      }
+    },
+    "Cinterface": {
+      "id": "Cinterface",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "ip": {
+          "$ref": "Cip"
+        }   
+      }
+    },
+    "Cip": {
+      "id": "Cip",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "netmask": {
+          "type": "string"
+        },
+        "ip_type": {
+          "type": "string",
+          "description": "type of ip",
+          "enum": [
+            "ipv4",
+            "ipv6"
+          ]
+        }
+      }
+    },
+    "DOpenflow": {
+      "id": "DOpenflow",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        }
+      }
+    }  
   }
 }

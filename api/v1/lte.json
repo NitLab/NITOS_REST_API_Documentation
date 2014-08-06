@@ -13,7 +13,22 @@
       "operations": [
         {
           "method": "GET",
-          "summary": "Find Lte by uuID",
+          "summary": "Get all LTE Base stations",
+          "notes": "",
+          "type": "Lte",
+          "nickname": "getAllLte",
+          "authorizations": {},
+          "parameters": [],
+          "responseMessages": [
+            {
+              "code": 404,
+              "message": "None LTE Base station found"
+            }
+          ]
+        },
+        {
+          "method": "GET",
+          "summary": "Find LTE Base station by uuID",
           "notes": "",
           "type": "Lte",
           "nickname": "getLteByUUID",
@@ -21,7 +36,7 @@
           "parameters": [
             {
               "name": "uuid",
-              "description": "uuID of Lte that needs to be fetched",
+              "description": "uuID of LTE Base station that needs to be fetched",
               "required": true,
               "type": "string",
               "paramType": "query"
@@ -34,18 +49,13 @@
             },
             {
               "code": 404,
-              "message": "Lte not found"
+              "message": "LTE Base station not found"
             }
           ]
-        }
-      ]
-    },
-    {
-      "path": "/lte",
-      "operations": [
+        },
         {
           "method": "GET",
-          "summary": "Find Lte by Name",
+          "summary": "Find LTE Base station by Name",
           "notes": "",
           "type": "Lte",
           "nickname": "getLteByName",
@@ -53,7 +63,7 @@
           "parameters": [
             {
               "name": "name",
-              "description": "Name of Lte that needs to be fetched",
+              "description": "Name of LTE Base station that needs to be fetched",
               "required": true,
               "type": "string",
               "paramType": "query"
@@ -66,43 +76,28 @@
             },
             {
               "code": 404,
-              "message": "Lte not found"
-            }
-          ]
-        },
-        {
-          "method": "GET",
-          "summary": "Get all lte",
-          "notes": "",
-          "type": "Lte",
-          "nickname": "getAllLte",
-          "authorizations": {},
-          "parameters": [],
-          "responseMessages": [
-            {
-              "code": 404,
-              "message": "None lte found"
+              "message": "LTE Base string not found"
             }
           ]
         }
       ]
-    },
+    },    
     {
       "path": "/lte",
       "operations": [
         {
           "method": "POST",
-          "summary": "Create a resource of type Lte",
+          "summary": "Create a resource of type LTE Base station",
           "notes": "",
-          "type": "void",
+          "type": "Lte",
           "nickname": "placeLte",
           "authorizations": {},
           "parameters": [
             {
               "name": "body",
-              "description": "order placed for creating a Lte",
+              "description": "order placed for creating a LTE Base station",
               "required": true,
-              "type": "Lte",
+              "type": "Clte",
               "paramType": "body"
             }
           ],
@@ -115,15 +110,15 @@
         },
         {
           "method": "PUT",
-          "summary": "Update an existing Lte",
-          "notes": "",
+          "summary": "Update an existing LTE Base station",
+          "notes": "Give the uuid and the parameters you want to change in json's body",
           "type": "void",
           "nickname": "updateLte",
           "authorizations": {},
           "parameters": [
             {
               "name": "body",
-              "description": "Lte that needs to be updated ",
+              "description": "LTE Base station that needs to be updated ",
               "required": true,
               "type": "Lte",
               "paramType": "body"
@@ -136,27 +131,23 @@
             },
             {
               "code": 404,
-              "message": "Lte not found"
-            },
-            {
-              "code": 405,
-              "message": "Validation exception"
+              "message": "LTE Base station not found"
             }
           ]
         },
         {
           "method": "DELETE",
-          "summary": "Delete a Lte",
-          "notes": "",
+          "summary": "Delete a LTE Base station",
+          "notes": "Give only the uuid of the LTE Base station you want to delete in json's body",
           "type": "void",
           "nickname": "deleteLte",
           "authorizations": {},
           "parameters": [
             {
               "name": "body",
-              "description": "Lte to be deleted in jason format",
+              "description": "LTE Base station to be deleted in jason format",
               "required": true,
-              "type": "Lte",
+              "type": "DLte",
               "paramType": "body"
             }
           ],
@@ -167,7 +158,7 @@
             },
             {
               "code": 404,
-              "message": "Lte not found"
+              "message": "LTE Base station not found"
             }
           ]
         }
@@ -178,6 +169,39 @@
     "Lte": {
       "id": "Lte",
       "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "urn":{
+          "type": "string",
+          "description": "Max length=>255",
+          "maximum": 255
+        },
+        "resource_type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "description": "Node Status",
+          "enum": [
+            "unknown",
+            "ready"            
+          ]
+        },
+        "domain" : {
+          "type": "string"
+        },
+        "exclusive": {
+          "type": "boolean"
+        },
+        "available": {
+          "type": "string"
+        },
         "base_model": {
           "type": "string"
         },
@@ -247,6 +271,78 @@
           ]
         }
       }
-    }
+    },
+    "Clte": {
+      "id": "Clte",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "urn":{
+          "type": "string",
+          "description": "Max length=>255",
+          "maximum": 255
+        },
+        "domain" : {
+          "type": "string"
+        },
+        "base_model": {
+          "type": "string"
+        },
+        "vendor": {
+          "type": "string"
+        },
+        "band": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string"
+        },
+        "ip_ap": {
+          "$ref": "Cip"
+        },
+        "ip_epc": {
+          "$ref": "Cip"
+        },
+        "apn": {
+          "type": "string"
+        },
+        "ip_pdn_gw": {
+          "$ref": "Cip"
+        }
+      }
+    },
+    "Cip": {
+      "id": "Cip",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "netmask": {
+          "type": "string"
+        },
+        "ip_type": {
+          "type": "string",
+          "description": "type of ip",
+          "enum": [
+            "ipv4",
+            "ipv6"
+          ]
+        }
+      }
+    },
+    "DLte": {
+      "id": "DLte",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        }
+      }
+    }  
   }
 }

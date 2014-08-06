@@ -13,7 +13,22 @@
       "operations": [
         {
           "method": "GET",
-          "summary": "Find Wimax by uuID",
+          "summary": "Get all Wimax Base stations",
+          "notes": "",
+          "type": "Wimax",
+          "nickname": "getAllWimax",
+          "authorizations": {},
+          "parameters": [],
+          "responseMessages": [
+            {
+              "code": 404,
+              "message": "None wimax Base station found"
+            }
+          ]
+        },
+        {
+          "method": "GET",
+          "summary": "Find Wimax Base station by uuID",
           "notes": "",
           "type": "Wimax",
           "nickname": "getWimaxByUUID",
@@ -21,7 +36,7 @@
           "parameters": [
             {
               "name": "uuid",
-              "description": "uuID of Wimax that needs to be fetched",
+              "description": "uuID of Wimax Base station that needs to be fetched",
               "required": true,
               "type": "string",
               "paramType": "query"
@@ -34,18 +49,13 @@
             },
             {
               "code": 404,
-              "message": "Wimax not found"
+              "message": "Wimax Base station not found"
             }
           ]
-        }
-      ]
-    },
-    {
-      "path": "/wimax",
-      "operations": [
+        },
         {
           "method": "GET",
-          "summary": "Find Wimax by Name",
+          "summary": "Find Wimax Base station by Name",
           "notes": "",
           "type": "Wimax",
           "nickname": "getWimaxByName",
@@ -53,7 +63,7 @@
           "parameters": [
             {
               "name": "name",
-              "description": "Name of Wimax that needs to be fetched",
+              "description": "Name of Wimax Base station that needs to be fetched",
               "required": true,
               "type": "string",
               "paramType": "query"
@@ -66,22 +76,7 @@
             },
             {
               "code": 404,
-              "message": "Wimax not found"
-            }
-          ]
-        },
-        {
-          "method": "GET",
-          "summary": "Get all wimax",
-          "notes": "",
-          "type": "Wimax",
-          "nickname": "getAllWimax",
-          "authorizations": {},
-          "parameters": [],
-          "responseMessages": [
-            {
-              "code": 404,
-              "message": "None wimax found"
+              "message": "Wimax Base station not found"
             }
           ]
         }
@@ -92,17 +87,17 @@
       "operations": [
         {
           "method": "POST",
-          "summary": "Create a resource of type Wimax",
+          "summary": "Create a resource of type Wimax Base station",
           "notes": "",
-          "type": "void",
+          "type": "Wimax",
           "nickname": "placeWimax",
           "authorizations": {},
           "parameters": [
             {
               "name": "body",
-              "description": "order placed for creating a Wimax",
+              "description": "order placed for creating a Wimax Base station",
               "required": true,
-              "type": "Wimax",
+              "type": "Cwimax",
               "paramType": "body"
             }
           ],
@@ -115,15 +110,15 @@
         },
         {
           "method": "PUT",
-          "summary": "Update an existing Wimax",
-          "notes": "",
+          "summary": "Update an existing Wimax Base station",
+          "notes": "Give the uuid and the parameters you want to change in json's body",
           "type": "void",
           "nickname": "updateWimax",
           "authorizations": {},
           "parameters": [
             {
               "name": "body",
-              "description": "Wimax that needs to be updated ",
+              "description": "Wimax Base station that needs to be updated ",
               "required": true,
               "type": "Wimax",
               "paramType": "body"
@@ -136,27 +131,23 @@
             },
             {
               "code": 404,
-              "message": "Wimax not found"
-            },
-            {
-              "code": 405,
-              "message": "Validation exception"
+              "message": "Wimax Base station not found"
             }
           ]
         },
         {
           "method": "DELETE",
-          "summary": "Delete a Wimax",
-          "notes": "",
+          "summary": "Delete a Wimax Base station",
+          "notes": "Give only the uuid of the Wimax Base station you want to delete in json's body",
           "type": "void",
           "nickname": "deleteWimax",
           "authorizations": {},
           "parameters": [
             {
               "name": "body",
-              "description": "Wimax to be deleted in jason format",
+              "description": "Wimax Base station to be deleted in jason format",
               "required": true,
-              "type": "Wimax",
+              "type": "DWimax",
               "paramType": "body"
             }
           ],
@@ -167,7 +158,7 @@
             },
             {
               "code": 404,
-              "message": "Wimax not found"
+              "message": "Wimax Base station not found"
             }
           ]
         }
@@ -178,6 +169,39 @@
     "Wimax": {
       "id": "Wimax",
       "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "urn":{
+          "type": "string",
+          "description": "Max length=>255",
+          "maximum": 255
+        },
+        "resource_type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "description": "Node Status",
+          "enum": [
+            "unknown",
+            "ready"            
+          ]
+        },
+        "domain" : {
+          "type": "string"
+        },
+        "exclusive": {
+          "type": "boolean"
+        },
+        "available": {
+          "type": "string"
+        },
         "base_model": {
           "type": "string"
         },
@@ -194,6 +218,42 @@
           "type": "string"
         }
       }
-    }
+    },
+    "Cwimax": {
+      "id": "Cwimax",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "domain" : {
+          "type": "string"
+        },
+        "base_model": {
+          "type": "string"
+        },
+        "vendor": {
+          "type": "string"
+        },
+        "band": {
+          "type": "string"
+        },
+        "vlan": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string"
+        }
+      }
+    },
+    "DWimax": {
+      "id": "DWimax",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "required": true
+        }
+      }
+    } 
   }
 }
