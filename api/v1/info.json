@@ -1,9 +1,9 @@
-{	
+{
   "apiVersion": "1.0.0",
 	"swaggerVersion": "1.2",
 	"authorizations":{},
 	"produces": ["application/json"],
-	"apis":[		
+	"apis":[
 		{"path": "/nodes",
 		  "description": "A Node is a physical machine that can be used in an experiment."
     },
@@ -27,7 +27,7 @@
     }
 	],
     "info": {
-		"title": "NITlab Sample App",
+		"title": "Broker REST API",
 		"description": "This is the reference document for the REST API provided by NITOS Broker. This REST API can be used by developers who need access to NITOS Broker inventory with other standalone or web applications, and administrators who want to script interactions with the Testbeds Servers.",
     "termsOfServiceUrl": "",
     "contact": "",
