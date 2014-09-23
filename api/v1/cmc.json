@@ -1,7 +1,7 @@
 {
   "apiVersion": "1.0.0",
   "swaggerVersion": "1.2",
-  "basePath": "#{@@basepath}",
+  "basePath": "",
   "resourcePath": "/cmc",
   "produces": [
     "application/json"
@@ -72,7 +72,7 @@
           "responseMessages": [
             {
               "code": 400,
-              "message": "Invalid UUID supplied"
+              "message": "Invalid name supplied"
             },
             {
               "code": 404,
@@ -104,7 +104,11 @@
           "responseMessages": [
             {
               "code": 400,
-              "message": "Invalid order"
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "message": "Unauthorized"
             }
           ]
         },
@@ -127,7 +131,11 @@
           "responseMessages": [
             {
               "code": 400,
-              "message": "Invalid uuID supplied"
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 401,
+              "message": "Unauthorized"
             },
             {
               "code": 404,
@@ -154,7 +162,11 @@
           "responseMessages": [
             {
               "code": 400,
-              "message": "Invalid uuID supplied"
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 401,
+              "message": "Unauthorized"
             },
             {
               "code": 404,
@@ -244,7 +256,7 @@
           "description": "Node Status",
           "enum": [
             "unknown",
-            "ready"            
+            "ready"
           ]
         },
         "exclusive": {
@@ -336,7 +348,7 @@
     },
     "interface": {
       "id": "interface",
-      "properties": {     
+      "properties": {
         "role": {
           "type": "string"
         },
@@ -457,7 +469,7 @@
     },
     "Ccmc": {
       "uuid": "Ccmc",
-      "properties": {        
+      "properties": {
         "name": {
           "type": "string",
           "required": true
@@ -500,7 +512,7 @@
         },
         "ip": {
           "$ref": "Cip"
-        }   
+        }
       }
     },
     "Cip": {
@@ -533,6 +545,6 @@
           "required": true
         }
       }
-    }  
+    }
   }
 }

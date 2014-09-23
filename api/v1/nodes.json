@@ -1,7 +1,7 @@
 {
   "apiVersion": "1.0.0",
   "swaggerVersion": "1.2",
-  "basePath": "#{@@basepath}",
+  "basePath": "",
   "resourcePath": "/nodes",
   "produces": [
     "application/json"
@@ -28,7 +28,7 @@
         },
         {
           "method": "GET",
-          "summary": "Find node by uuID",
+          "summary": "Find node by UUID",
           "notes": "",
           "type": "Node",
           "nickname": "getNodeByUUID",
@@ -36,7 +36,7 @@
           "parameters": [
             {
               "name": "uuid",
-              "description": "uuID of Node that needs to be fetched",
+              "description": "UUID of Node that needs to be fetched",
               "required": true,
               "type": "string",
               "paramType": "query"
@@ -103,7 +103,11 @@
           "responseMessages": [
             {
               "code": 400,
-              "message": "Invalid order"
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "message": "Unauthorized"
             }
           ]
         },
@@ -126,7 +130,11 @@
           "responseMessages": [
             {
               "code": 400,
-              "message": "Invalid uuID supplied"
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 401,
+              "message": "Unauthorized"
             },
             {
               "code": 404,
@@ -148,13 +156,17 @@
               "required": true,
               "type": "DNode",
               "paramType": "body"
-            
+
             }
           ],
           "responseMessages": [
             {
               "code": 400,
-              "message": "Invalid uuID supplied"
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 401,
+              "message": "Unauthorized"
             },
             {
               "code": 404,
@@ -202,7 +214,7 @@
           "description": "Node Status",
           "enum": [
             "unknown",
-            "ready"            
+            "ready"
           ]
         },
         "exclusive": {
@@ -257,7 +269,7 @@
         },
         "ip": {
           "$ref": "ip"
-        },        
+        },
         "available": {
           "type": "boolean"
         },
@@ -392,18 +404,18 @@
         "name": {
           "type": "string",
           "required": true
-        },      
+        },
         "interfaces": {
           "type": "array",
           "items": {
             "$ref": "Cinterface"
           }
-        },        
+        },
         "urn":{
           "type": "string",
           "description": "Max length=>255",
           "maximum": 255
-        },        
+        },
         "exclusive": {
           "type": "boolean"
         },
@@ -435,7 +447,7 @@
     },
     "Ccmc":{
       "id": "Ccmc",
-      "properties":{        
+      "properties":{
         "name": {
           "type": "string"
         },
@@ -446,7 +458,7 @@
           "$ref": "Cip"
         }
       }
-    },   
+    },
     "Cinterface": {
       "id": "Cinterface",
       "properties": {
@@ -458,7 +470,7 @@
         },
         "ip": {
           "$ref": "Cip"
-        }   
+        }
       }
     },
     "Cip": {
@@ -491,6 +503,6 @@
           "required": true
         }
       }
-    }  
+    }
   }
 }

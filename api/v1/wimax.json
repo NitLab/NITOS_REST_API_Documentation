@@ -1,7 +1,7 @@
 {
   "apiVersion": "1.0.0",
   "swaggerVersion": "1.2",
-  "basePath": "#{@@basepath}",
+  "basePath": "",
   "resourcePath": "/wimax",
   "produces": [
     "application/json"
@@ -13,7 +13,7 @@
       "operations": [
         {
           "method": "GET",
-          "summary": "Get all Wimax Base stations",
+          "summary": "Get all WiMAX Base stations",
           "notes": "",
           "type": "Wimax",
           "nickname": "getAllWimax",
@@ -22,13 +22,13 @@
           "responseMessages": [
             {
               "code": 404,
-              "message": "None wimax Base station found"
+              "message": "None WiMAX Base station found"
             }
           ]
         },
         {
           "method": "GET",
-          "summary": "Find Wimax Base station by uuID",
+          "summary": "Find WiMAX Base station by UUID",
           "notes": "",
           "type": "Wimax",
           "nickname": "getWimaxByUUID",
@@ -36,7 +36,7 @@
           "parameters": [
             {
               "name": "uuid",
-              "description": "uuID of Wimax Base station that needs to be fetched",
+              "description": "UUID of WiMAX Base station that needs to be fetched",
               "required": true,
               "type": "string",
               "paramType": "query"
@@ -49,7 +49,7 @@
             },
             {
               "code": 404,
-              "message": "Wimax Base station not found"
+              "message": "WiMAX Base station not found"
             }
           ]
         },
@@ -63,7 +63,7 @@
           "parameters": [
             {
               "name": "name",
-              "description": "Name of Wimax Base station that needs to be fetched",
+              "description": "Name of WiMAX Base station that needs to be fetched",
               "required": true,
               "type": "string",
               "paramType": "query"
@@ -76,7 +76,7 @@
             },
             {
               "code": 404,
-              "message": "Wimax Base station not found"
+              "message": "WiMAX Base station not found"
             }
           ]
         }
@@ -87,7 +87,7 @@
       "operations": [
         {
           "method": "POST",
-          "summary": "Create a resource of type Wimax Base station",
+          "summary": "Create a resource of type WiMAX Base station",
           "notes": "",
           "type": "Wimax",
           "nickname": "placeWimax",
@@ -95,7 +95,7 @@
           "parameters": [
             {
               "name": "body",
-              "description": "order placed for creating a Wimax Base station",
+              "description": "order placed for creating a WiMAX Base station",
               "required": true,
               "type": "Cwimax",
               "paramType": "body"
@@ -104,13 +104,17 @@
           "responseMessages": [
             {
               "code": 400,
-              "message": "Invalid order"
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "message": "Unauthorized"
             }
           ]
         },
         {
           "method": "PUT",
-          "summary": "Update an existing Wimax Base station",
+          "summary": "Update an existing WiMAX Base station",
           "notes": "Give the uuid and the parameters you want to change in json's body",
           "type": "void",
           "nickname": "updateWimax",
@@ -118,7 +122,7 @@
           "parameters": [
             {
               "name": "body",
-              "description": "Wimax Base station that needs to be updated ",
+              "description": "WiMAX Base station that needs to be updated ",
               "required": true,
               "type": "Wimax",
               "paramType": "body"
@@ -127,17 +131,21 @@
           "responseMessages": [
             {
               "code": 400,
-              "message": "Invalid uuID supplied"
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 401,
+              "message": "Unauthorized"
             },
             {
               "code": 404,
-              "message": "Wimax Base station not found"
+              "message": "WiMAX Base station not found"
             }
           ]
         },
         {
           "method": "DELETE",
-          "summary": "Delete a Wimax Base station",
+          "summary": "Delete a WiMAX Base station",
           "notes": "Give only the uuid of the Wimax Base station you want to delete in json's body",
           "type": "void",
           "nickname": "deleteWimax",
@@ -145,7 +153,7 @@
           "parameters": [
             {
               "name": "body",
-              "description": "Wimax Base station to be deleted in jason format",
+              "description": "WiMAX Base station to be deleted in json format",
               "required": true,
               "type": "DWimax",
               "paramType": "body"
@@ -154,11 +162,15 @@
           "responseMessages": [
             {
               "code": 400,
-              "message": "Invalid uuID supplied"
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 401,
+              "message": "Unauthorized"
             },
             {
               "code": 404,
-              "message": "Wimax Base station not found"
+              "message": "WiMAX Base station not found"
             }
           ]
         }
@@ -190,7 +202,7 @@
           "description": "Node Status",
           "enum": [
             "unknown",
-            "ready"            
+            "ready"
           ]
         },
         "domain" : {
@@ -254,6 +266,6 @@
           "required": true
         }
       }
-    } 
+    }
   }
 }

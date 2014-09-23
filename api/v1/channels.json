@@ -1,7 +1,7 @@
 {
   "apiVersion": "1.0.0",
   "swaggerVersion": "1.2",
-  "basePath": "#{@@basepath}",
+  "basePath": "",
   "resourcePath": "/channels",
   "produces": [
     "application/json"
@@ -28,7 +28,7 @@
         },
         {
           "method": "GET",
-          "summary": "Find channel by uuid",
+          "summary": "Find channel by UUID",
           "notes": "",
           "type": "Channel",
           "nickname": "getChannelByUUID",
@@ -36,10 +36,20 @@
           "parameters": [
             {
               "name": "uuid",
-              "description": "uuID of channel that needs to be fetched",
+              "description": "UUID of channel that needs to be fetched",
               "required": true,
               "type": "string",
               "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Channel not found"
             }
           ]
         },
@@ -94,7 +104,11 @@
           "responseMessages": [
             {
               "code": 400,
-              "message": "Invalid order"
+              "message": "Bad Request"
+            },
+            {
+              "code": 401,
+              "message": "Unauthorized"
             }
           ]
         },
@@ -117,7 +131,11 @@
           "responseMessages": [
             {
               "code": 400,
-              "message": "Invalid uuID supplied"
+              "message": "Invalid UUID supplied"
+            },
+            {
+              "code": 401,
+              "message": "Unauthorized"
             },
             {
               "code": 404,
@@ -145,6 +163,10 @@
             {
               "code": 400,
               "message": "Invalid uuID supplied"
+            },
+            {
+              "code": 401,
+              "message": "Unauthorized"
             },
             {
               "code": 404,
@@ -229,7 +251,7 @@
         },
         "link": {
           "$ref": "Link"
-        } 
+        }
       }
     },
     "ip": {
@@ -321,7 +343,7 @@
         },
         "ip": {
           "$ref": "Cip"
-        }   
+        }
       }
     },
     "Cip": {
@@ -354,6 +376,6 @@
           "required": true
         }
       }
-    }  
+    }
   }
 }
