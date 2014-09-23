@@ -8,7 +8,6 @@ require 'yaml'
 
 class DocServer < Sinatra::Base
 
-  @@basepath = "https://10.64.44.12:8001/resources"
 
   set :public_folder, 'swagger-ui/dist'
 
@@ -28,7 +27,7 @@ class DocServer < Sinatra::Base
 
 
 
-  get '/api/api-docs' do 
+  get '/api/api-docs' do
 
     content_type :json
 
@@ -159,6 +158,7 @@ class DocServer < Sinatra::Base
 
   def self.run!
     @config = YAML.load_file(File.dirname(__FILE__) + '/configuration.yaml')
+    @@basepath = @config[:basepath]
     ssl = @config[:ssl]
   	ssl_options = {
       :cert_chain_file => ssl[:cert_chain_file],
