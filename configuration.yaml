@@ -3,7 +3,7 @@
 
 :basepath: "https://10.64.44.12:8001/resources"
 
-:port: 6000
+:port: 6100
 
 :ssl:
   :enabled: true

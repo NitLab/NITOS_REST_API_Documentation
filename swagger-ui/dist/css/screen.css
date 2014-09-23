@@ -1162,7 +1162,7 @@
   cursor: pointer;
 }
 .swagger-section #header {
-  background: #305086 url(http://nitlab.inf.uth.gr/NITlab/templates/rt_solarsentinel/images/header/blue/header-bg.png) 0 0 repeat-x;
+  background: #305086 url(../images/header/blue/header-bg.png) 0 0 repeat-x;
   padding: 13px;
 }
 .swagger-section #header a#logo {
