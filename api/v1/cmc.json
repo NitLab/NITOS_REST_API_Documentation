@@ -387,10 +387,10 @@
         "threads": {
           "type": "string"
         },
-        "cache_11": {
+        "cache_l1": {
           "type": "string"
         },
-        "cache_12": {
+        "cache_l2": {
           "type": "string"
         }
       }
